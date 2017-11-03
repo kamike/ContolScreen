@@ -1,6 +1,7 @@
 package com.example.wangtao.contolscreen;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.Utils;
@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onclickStartBlack(View view) {
-        FullBlackDialog dialog = new FullBlackDialog(this, R.style.dialog_full);
-
+        FullBlackDialog dialog = new FullBlackDialog(getApplicationContext(), R.style.dialog_full);
         dialog.show();
         Window window = dialog.getWindow();
+
+
         window.setGravity(Gravity.BOTTOM);
         window.setWindowAnimations(R.style.dialog_full);
         window.getDecorView().setPadding(0, 0, 0, 0);
@@ -109,8 +110,16 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
-            AppUtils.launchApp(getPackageName());
+            //startThisActivity();
+            onclickStartBlack(null);
         }
 
     };
+
+    private void startThisActivity() {
+        Intent intent = new Intent();
+        ComponentName cn = new ComponentName(getPackageName(),getComponentName().getClassName());
+        intent.setComponent(cn);
+        startActivity(intent);
+    }
 }

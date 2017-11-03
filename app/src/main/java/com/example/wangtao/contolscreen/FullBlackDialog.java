@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 /**
@@ -18,6 +20,8 @@ public class FullBlackDialog extends Dialog {
     public FullBlackDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
         this.context = context;
+        Window window = getWindow();
+        window.setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         setCancelable(false);
     }
 
